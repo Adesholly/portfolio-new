@@ -2,9 +2,9 @@ import React from "react"
 import { CgWorkAlt } from "react-icons/cg"
 import { FaReact } from "react-icons/fa"
 import { LuGraduationCap } from "react-icons/lu"
-import corpcommentImg from "@/public/corpcomment.png"
-import rmtdevImg from "@/public/rmtdev.png"
-import wordanalyticsImg from "@/public/wordanalytics.png"
+import pislfreightImg from "@/public/pislfreight.png"
+import zenillaImg from "@/public/zenilla.png"
+import huntvilleImg from "@/public/huntville.png"
 
 export const links = [
   {
@@ -60,27 +60,32 @@ export const experiencesData = [
 ] as const
 
 export const projectsData = [
+
+
   {
-    title: "",
-    description:
-      "I worked as a full-stack developer on this startup project for 2 years. Users can give public feedback to companies.",
-    tags: ["React", "Next.js", "MongoDB", "Tailwind", "Prisma"],
-    imageUrl: corpcommentImg,
+    title: "Zenilla Media",
+    description:"Web for unparalleled integrated marketing communications solutions tailored for the diverse and dynamic landscape of Sub-Saharan Africa.",
+    tags: ["React", "Next.js", "Tailwind"],
+    imageUrl: zenillaImg,
+    link: "https://www.zenillamedia.com", 
   },
   {
-    title: "",
+    title: "PISL Freight",
     description:
-      "Job board for remote developer jobs. I was the front-end developer. It has features like filtering, sorting and pagination.",
+      "A web facing application for approximately tell the client cost of buying a car from directly from the  United State and shipping it to Nigeria. ",
+    tags: ["React", "Next.js", "MongoDB", "Tailwind", "Node", "Express" ],
+    imageUrl: pislfreightImg,
+    link: "https://www/pislfreight.com",
+  },
+  {
+    title: "Huntville",
+    description:
+      "Huntville it an online exam registration center,technological solution for clients and trainings ",
     tags: ["React", "TypeScript", "Next.js", "Tailwind", "Redux"],
-    imageUrl: rmtdevImg,
+    imageUrl: huntvilleImg,
+    link: "https://www.huntvilletech.com.ng",
   },
-  {
-    title: "",
-    description:
-      "A public web app for quick analytics on text. It shows word count, character count and social media post limits.",
-    tags: ["React", "Next.js", "SQL", "Tailwind", "Framer"],
-    imageUrl: wordanalyticsImg,
-  },
+  
 ] as const
 
 export const skillsData = [
