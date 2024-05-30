@@ -75,7 +75,7 @@ export const projectsData = [
       "A web facing application for approximately tell the client cost of buying a car from directly from the  United State and shipping it to Nigeria. ",
     tags: ["React", "Next.js", "MongoDB", "Tailwind", "Node", "Express" ],
     imageUrl: pislfreightImg,
-    link: "https://www/pislfreight.com",
+    link: "https://pislfreight.com",
   },
   {
     title: "Huntville",
@@ -83,7 +83,7 @@ export const projectsData = [
       "Huntville it an online exam registration center,technological solution for clients and trainings ",
     tags: ["React", "TypeScript", "Next.js", "Tailwind", "Redux"],
     imageUrl: huntvilleImg,
-    link: "https://www.huntvilletech.com.ng",
+    link: "https://huntsvilletech.com.ng/",
   },
   
 ] as const

@@ -14,6 +14,8 @@ export default function Intro() {
   const { ref } = useSectionInView("Home", 0.5);
   const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
 
+  const date = new Date()
+
   return (
     <section
       ref={ref}
@@ -64,9 +66,9 @@ export default function Intro() {
       >
         <span className="font-bold">Hello, I&apos;m Ibrahim.</span> I&apos;m a{" "}
         <span className="font-bold">Software developer</span> with{" "}
-        <span className="font-bold">5 years</span> of experience. I enjoy
+        <span className="font-bold">{date.getFullYear() - 2019} years</span> of experience. I enjoy
         building <span className="italic">sites & apps</span>. My focuses are{" "}
-        <span className="underline">Softwarre development, ML, Cloud Computing and IT Supports & Security</span>.
+        <span className="underline">Software development, ML, Cloud Computing and IT Supports & Security</span>.
       </motion.h1>
 
       <motion.div
