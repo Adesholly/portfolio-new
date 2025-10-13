@@ -99,6 +99,7 @@ export const skillsData = [
   "Python",
   "PHP",
   "C++",
+  "Go Lang",
   "SQL",
   "MongoDB",
   "GraphQL",
