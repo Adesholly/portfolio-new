@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme/theme-provider";
 import { Analytics } from "@/components/analytics/analytics";
 import { SideRail } from "@/components/ui/side-rail";
 import { SiteHeader } from "@/components/ui/site-header";
+import { SkipLink } from "@/components/ui/skip-link";
 import "./globals.css";
 
 const inter = Inter({
@@ -79,6 +80,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-screen bg-background font-sans antialiased">
+        <SkipLink />
         {/* JSON-LD Structured Data */}
         <script
           type="application/ld+json"
@@ -118,7 +120,9 @@ export default function RootLayout({
               <SiteHeader />
 
               {/* Page Content */}
-              <main className="flex-1">{children}</main>
+              <main id="main-content" className="flex-1" tabIndex={-1}>
+                {children}
+              </main>
             </div>
           </div>
 

@@ -48,20 +48,25 @@ export function Projects() {
               transition={{ duration: 0.5, delay: 0.1 * index }}
             >
               <Card className="group overflow-hidden transition-all hover:shadow-lg">
-                <div className="relative h-48 w-full overflow-hidden">
-                  <Image
-                    src={project.imageUrl}
-                    alt={project.title}
-                    fill
-                    className="object-cover transition-transform group-hover:scale-105"
-                  />
-                </div>
-                <CardHeader>
-                  <CardTitle className="text-xl">{project.title}</CardTitle>
-                  <p className="line-clamp-3 text-sm text-muted-foreground">
-                    {project.description}
-                  </p>
-                </CardHeader>
+                <Link
+                  href={`/projects/${project.title.toLowerCase().replace(/\s+/g, "-")}`}
+                  className="block"
+                >
+                  <div className="relative h-48 w-full overflow-hidden">
+                    <Image
+                      src={project.imageUrl}
+                      alt={project.title}
+                      fill
+                      className="object-cover transition-transform group-hover:scale-105"
+                    />
+                  </div>
+                  <CardHeader>
+                    <CardTitle className="text-xl">{project.title}</CardTitle>
+                    <p className="line-clamp-3 text-sm text-muted-foreground">
+                      {project.description}
+                    </p>
+                  </CardHeader>
+                </Link>
                 <CardContent>
                   <div className="mb-4 flex flex-wrap gap-2">
                     {project.tags.map((tag) => (
@@ -71,6 +76,14 @@ export function Projects() {
                     ))}
                   </div>
                   <div className="flex space-x-2">
+                    <Button asChild size="sm" variant="outline">
+                      <Link
+                        href={`/projects/${project.title.toLowerCase().replace(/\s+/g, "-")}`}
+                        className="flex items-center"
+                      >
+                        View Details
+                      </Link>
+                    </Button>
                     {project.link && (
                       <Button asChild size="sm" variant="outline">
                         <a

@@ -20,10 +20,17 @@ export function SideRail() {
   const pathname = usePathname();
 
   return (
-    <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-background px-6 pb-4">
+    <div
+      className="flex grow flex-col gap-y-5 overflow-y-auto bg-background px-6 pb-4"
+      aria-label="Main navigation"
+    >
       <div className="flex h-16 shrink-0 items-center">
-        <Link href="/" className="flex items-center space-x-2">
-          <div className="h-8 w-8 rounded-full bg-primary" />
+        <Link
+          href="/"
+          className="flex items-center space-x-2"
+          aria-label="Adesholly - Home"
+        >
+          <div className="h-8 w-8 rounded-full bg-primary" aria-hidden="true" />
           <span className="text-xl font-bold">Adesholly</span>
         </Link>
       </div>
@@ -39,11 +46,12 @@ export function SideRail() {
                     <Link
                       href={item.href}
                       className={cn(
-                        "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 transition-colors",
+                        "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
                         isActive
                           ? "bg-accent text-accent-foreground"
                           : "text-muted-foreground hover:bg-accent hover:text-foreground"
                       )}
+                      aria-current={isActive ? "page" : undefined}
                     >
                       {item.name}
                       {isActive && (
@@ -55,6 +63,7 @@ export function SideRail() {
                             stiffness: 380,
                             damping: 30,
                           }}
+                          aria-hidden="true"
                         />
                       )}
                     </Link>
@@ -63,20 +72,23 @@ export function SideRail() {
               })}
             </ul>
           </li>
-
           <li className="mt-auto">
             <div className="flex items-center justify-between">
-              <div className="flex space-x-4">
+              <div
+                className="flex space-x-4"
+                role="list"
+                aria-label="Social links"
+              >
                 {socialLinks.map((link) => (
                   <a
                     key={link.name}
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground transition-colors hover:text-foreground"
-                    aria-label={link.name}
+                    className="rounded-sm text-muted-foreground transition-colors hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                    aria-label={`${link.name} - Opens in new tab`}
                   >
-                    <link.icon className="h-5 w-5" />
+                    <link.icon className="h-5 w-5" aria-hidden="true" />
                   </a>
                 ))}
               </div>
