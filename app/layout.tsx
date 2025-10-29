@@ -1,17 +1,70 @@
-import Header from "@/components/header";
+import type { Metadata } from "next";
+import { Inter, JetBrains_Mono } from "next/font/google";
+import { ThemeProvider } from "@/components/theme/theme-provider";
+import { Analytics } from "@/components/analytics/analytics";
+import { SideRail } from "@/components/ui/side-rail";
+import { SiteHeader } from "@/components/ui/site-header";
 import "./globals.css";
-import { Inter } from "next/font/google";
-import ActiveSectionContextProvider from "@/context/active-section-context";
-import Footer from "@/components/footer";
-import ThemeSwitch from "@/components/theme-switch";
-import ThemeContextProvider from "@/context/theme-context";
-import { Toaster } from "react-hot-toast";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
 
-export const metadata = {
-  title: "Adesholly | Personal Portfolio",
-  description: "Ricardo is a full-stack developer with 8 years of experience.",
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  title: {
+    default: "Adesholly | Full-Stack Developer",
+    template: "%s | Adesholly",
+  },
+  description:
+    "Full-stack developer with 8+ years of experience building modern web applications. Specialized in React, Next.js, Node.js, and cloud technologies.",
+  keywords: [
+    "full-stack developer",
+    "react",
+    "nextjs",
+    "typescript",
+    "nodejs",
+    "web development",
+    "portfolio",
+  ],
+  authors: [{ name: "Adesholly" }],
+  creator: "Adesholly",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://adesholly.vercel.app/",
+    title: "Adesholly | Full-Stack Developer",
+    description:
+      "Full-stack developer with 8+ years of experience building modern web applications.",
+    siteName: "Adesholly Portfolio",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Adesholly | Full-Stack Developer",
+    description:
+      "Full-stack developer with 8+ years of experience building modern web applications.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: "your-google-verification-code",
+  },
 };
 
 export default function RootLayout({
@@ -20,23 +73,57 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="!scroll-smooth">
-      <body
-        className={`${inter.className} bg-gray-50 text-gray-950 relative pt-28 sm:pt-36 dark:bg-gray-900 dark:text-gray-50 dark:text-opacity-90`}
-      >
-        <div className="bg-[#fbe2e3] absolute top-[-6rem] -z-10 right-[11rem] h-[31.25rem] w-[31.25rem] rounded-full blur-[10rem] sm:w-[68.75rem] dark:bg-[#946263]"></div>
-        <div className="bg-[#dbd7fb] absolute top-[-1rem] -z-10 left-[-35rem] h-[31.25rem] w-[50rem] rounded-full blur-[10rem] sm:w-[68.75rem] md:left-[-33rem] lg:left-[-28rem] xl:left-[-15rem] 2xl:left-[-5rem] dark:bg-[#676394]"></div>
+    <html
+      lang="en"
+      className={`${inter.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="min-h-screen bg-background font-sans antialiased">
+        {/* JSON-LD Structured Data */}
+        <script
+          type="application/ld+json"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Adesholly",
+              url:
+                process.env.NEXT_PUBLIC_SITE_URL ||
+                "https://adesholly.vercel.app/",
+              sameAs: [
+                "https://github.com/adesholly",
+                "https://www.linkedin.com/in/adesholly/",
+                "https://x.com/ade_sholly11",
+              ],
+              jobTitle: "Full-Stack Developer",
+            }),
+          }}
+        />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="relative flex min-h-screen">
+            {/* Side Rail - Desktop Only */}
+            <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
+              <SideRail />
+            </div>
 
-        <ThemeContextProvider>
-          <ActiveSectionContextProvider>
-            <Header />
-            {children}
-            <Footer />
+            {/* Main Content */}
+            <div className="flex flex-1 flex-col lg:pl-72">
+              {/* Mobile Header */}
+              <SiteHeader />
 
-            <Toaster position="top-right" />
-            <ThemeSwitch />
-          </ActiveSectionContextProvider>
-        </ThemeContextProvider>
+              {/* Page Content */}
+              <main className="flex-1">{children}</main>
+            </div>
+          </div>
+
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -1,10 +1,11 @@
-import React from "react"
-import { CgWorkAlt } from "react-icons/cg"
-import { FaReact } from "react-icons/fa"
-import { LuGraduationCap } from "react-icons/lu"
-import pislfreightImg from "@/public/pislfreight.png"
-import zenillaImg from "@/public/zenilla.png"
-import huntvilleImg from "@/public/huntville.png"
+import React from "react";
+import { CgWorkAlt } from "react-icons/cg";
+import { FaReact } from "react-icons/fa";
+import { LuGraduationCap } from "react-icons/lu";
+import { Github, Linkedin, Mail, Twitter } from "lucide-react";
+import pislfreightImg from "@/public/pislfreight.png";
+import zenillaImg from "@/public/zenilla.png";
+import huntvilleImg from "@/public/huntville.png";
 
 export const links = [
   {
@@ -31,7 +32,7 @@ export const links = [
     name: "Contact",
     hash: "#contact",
   },
-] as const
+] as const;
 
 export const experiencesData = [
   {
@@ -45,35 +46,34 @@ export const experiencesData = [
   {
     title: "Software Developer",
     location: "TechSpice, Lagos",
-    description: "I worked as a part-time developer role, with role lead role overseeing the complete developement process",
+    description:
+      "I worked as a part-time developer role, with role lead role overseeing the complete developement process",
     icon: React.createElement(CgWorkAlt),
     date: "2021 - 2023",
   },
   {
     title: "Jnr. Software Developer",
     location: "GIIT, Lagos",
-    description:
-      "It was an intership experience that became a remote job.",
+    description: "It was an intership experience that became a remote job.",
     icon: React.createElement(FaReact),
     date: "2018 - 2020",
   },
-] as const
+] as const;
 
 export const projectsData = [
-
-
   {
     title: "Zenilla Media",
-    description:"Web for unparalleled integrated marketing communications solutions tailored for the diverse and dynamic landscape of Sub-Saharan Africa.",
+    description:
+      "Web for unparalleled integrated marketing communications solutions tailored for the diverse and dynamic landscape of Sub-Saharan Africa.",
     tags: ["React", "Next.js", "Tailwind"],
     imageUrl: zenillaImg,
-    link: "https://www.zenillamedia.com", 
+    link: "https://www.zenillamedia.com",
   },
   {
     title: "PISL Freight",
     description:
       "A web facing application for approximately tell the client cost of buying a car from directly from the  United State and shipping it to Nigeria. ",
-    tags: ["React", "Next.js", "MongoDB", "Tailwind", "Node", "Express" ],
+    tags: ["React", "Next.js", "MongoDB", "Tailwind", "Node", "Express"],
     imageUrl: pislfreightImg,
     link: "https://www/pislfreight.com",
   },
@@ -85,8 +85,7 @@ export const projectsData = [
     imageUrl: huntvilleImg,
     link: "https://www.huntvilletech.com.ng",
   },
-  
-] as const
+] as const;
 
 export const skillsData = [
   "JavaScript",
@@ -114,4 +113,27 @@ export const skillsData = [
   " Vulnerability Assessment",
   "Penetration Testing",
   "IT Support",
-] as const
+] as const;
+
+export const socialLinks = [
+  {
+    name: "GitHub",
+    href: "https://github.com/adesholly",
+    icon: Github,
+  },
+  {
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/in/adesholly/",
+    icon: Linkedin,
+  },
+  {
+    name: "X",
+    href: "https://x.com/ade_sholly11",
+    icon: Twitter,
+  },
+  {
+    name: "Email",
+    href: "mailto:adesholly11@gmail.com",
+    icon: Mail,
+  },
+] as const;
