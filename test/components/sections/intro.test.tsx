@@ -11,7 +11,7 @@ describe("Intro", () => {
   it("renders the description", () => {
     render(<Intro />);
     expect(
-      screen.getByText(/full-stack developer with 8\+ years of experience/i)
+      screen.getByText(/full-stack developer with 5\+ years of experience/i)
     ).toBeInTheDocument();
   });
 

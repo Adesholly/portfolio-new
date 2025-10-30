@@ -59,18 +59,6 @@ export function Contact() {
                     Send me an email
                   </a>
                 </Button>
-
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="w-full sm:w-auto"
-                >
-                  <a href="#contact" className="flex items-center">
-                    <MessageCircle className="mr-2 h-4 w-4" />
-                    Start a conversation
-                  </a>
-                </Button>
               </div>
 
               <div className="border-t pt-6">

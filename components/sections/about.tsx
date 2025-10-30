@@ -4,6 +4,7 @@ import * as React from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Card, CardContent } from "@/components/ui/card";
+import { experienceYears } from "@/lib/utils";
 
 export function About() {
   const { ref, inView } = useInView({
@@ -38,10 +39,10 @@ export function About() {
             <CardContent className="p-8">
               <div className="prose prose-slate max-w-none dark:prose-invert">
                 <p className="text-lg leading-8">
-                  I&apos;m a passionate full-stack developer with over 8 years
-                  of experience building modern web applications. I love
-                  creating solutions that are not only functional but also
-                  provide exceptional user experiences.
+                  I&apos;m a passionate full-stack developer with over{" "}
+                  {experienceYears} years of experience building modern web
+                  applications. I love creating solutions that are not only
+                  functional but also provide exceptional user experiences.
                 </p>
 
                 <p className="mt-4 text-lg leading-8">

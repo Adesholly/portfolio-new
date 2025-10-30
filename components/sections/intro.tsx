@@ -2,9 +2,10 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
-import { ArrowDown, Download } from "lucide-react";
+import { ArrowDown, Download, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { socialLinks } from "@/lib/data";
+import { socialLinks, RESUME_URL } from "@/lib/data";
+import { experienceYears } from "@/lib/utils";
 
 export function Intro() {
   return (
@@ -16,12 +17,12 @@ export function Intro() {
           transition={{ duration: 0.5 }}
         >
           <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl">
-            Hi, I&apos;m <span className="text-primary">Adesholly</span>
+            Hi, I&apos;m <span className="text-primary">Ibrahim</span>
           </h1>
           <p className="mt-6 text-lg leading-8 text-muted-foreground sm:text-xl">
-            A full-stack developer with 8+ years of experience building modern
-            web applications. I specialize in React, Next.js, Node.js, and cloud
-            technologies.
+            A full-stack developer with {experienceYears}+ years of experience
+            building modern web applications. I specialize in React, Next.js,
+            Node.js, and cloud technologies.
           </p>
         </motion.div>
 
@@ -31,9 +32,18 @@ export function Intro() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
         >
-          <Button size="lg" className="group">
-            <Download className="mr-2 h-4 w-4" />
-            Download CV
+          <Button asChild size="lg" className="group">
+            <a href={RESUME_URL} download>
+              <Download className="mr-2 h-4 w-4" />
+              Download Resume
+            </a>
+          </Button>
+
+          <Button asChild size="lg" variant="outline" className="group">
+            <a href="#contact">
+              <MessageCircle className="mr-2 h-4 w-4" />
+              Start a conversation
+            </a>
           </Button>
 
           <div className="flex space-x-4">
