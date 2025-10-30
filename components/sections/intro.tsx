@@ -32,11 +32,15 @@ export function Intro() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
         >
-          <Button asChild size="lg" className="group">
+          {/* <Button asChild size="lg" className="group">
             <a href={RESUME_URL} download>
               <Download className="mr-2 h-4 w-4" />
               Download Resume
             </a>
+          </Button> */}
+
+          <Button asChild size="lg" className="group">
+            <a href="/resume">Preview Resume</a>
           </Button>
 
           <Button asChild size="lg" variant="outline" className="group">
@@ -45,21 +49,6 @@ export function Intro() {
               Start a conversation
             </a>
           </Button>
-
-          <div className="flex space-x-4">
-            {socialLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground transition-colors hover:text-foreground"
-                aria-label={link.name}
-              >
-                <link.icon className="h-6 w-6" />
-              </a>
-            ))}
-          </div>
         </motion.div>
 
         <motion.div
