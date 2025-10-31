@@ -24,13 +24,17 @@ export function SideRail() {
       className="flex grow flex-col gap-y-5 overflow-y-auto bg-background px-6 pb-4"
       aria-label="Main navigation"
     >
-      <div className="flex h-16 shrink-0 items-center">
+      <div className="my-8 flex h-16 shrink-0 items-center">
         <Link
           href="/"
           className="flex items-center space-x-2"
           aria-label="Adesholly - Home"
         >
-          <div className="h-8 w-8 rounded-full bg-primary" aria-hidden="true" />
+          <img
+            src="/adesholly.png"
+            alt="Adesholly"
+            className="h-16 w-16 rounded-full bg-primary"
+          />
           <span className="text-xl font-bold">Adesholly</span>
         </Link>
       </div>

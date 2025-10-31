@@ -39,7 +39,7 @@ export const experiencesData = [
     title: "Frontend Lead",
     location: "Polaris Digitech, Lagos",
     description:
-      "Working as sofware developer majorly frontend role, also cloud architect",
+      "Working as lead frontend developer role, mentoring junior developers and overseeing the complete development process",
     icon: React.createElement(LuGraduationCap),
     date: "2024 - Present",
   },
@@ -48,7 +48,7 @@ export const experiencesData = [
     title: "Software Developer",
     location: "Polaris Digitech, Lagos",
     description:
-      "Working as sofware developer majorly frontend role, also cloud architect",
+      "Worked as sofware developer majorly frontend role, also cloud architect",
     icon: React.createElement(LuGraduationCap),
     date: "2023 - 2024",
   },
@@ -65,7 +65,7 @@ export const experiencesData = [
     location: "GIIT, Lagos",
     description: "It was an intership experience that became a remote job.",
     icon: React.createElement(FaReact),
-    date: "2019 - 2020",
+    date: "2020 - 2020",
   },
 ] as const;
 

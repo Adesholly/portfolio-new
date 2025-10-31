@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
-import { ArrowDown, Download, MessageCircle } from "lucide-react";
+import { ArrowDown, Download, Gamepad2, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { socialLinks, RESUME_URL } from "@/lib/data";
 import { experienceYears } from "@/lib/utils";
@@ -32,13 +32,6 @@ export function Intro() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
         >
-          {/* <Button asChild size="lg" className="group">
-            <a href={RESUME_URL} download>
-              <Download className="mr-2 h-4 w-4" />
-              Download Resume
-            </a>
-          </Button> */}
-
           <Button asChild size="lg" className="group">
             <a href="/resume">Preview Resume</a>
           </Button>
@@ -47,6 +40,20 @@ export function Intro() {
             <a href="#contact">
               <MessageCircle className="mr-2 h-4 w-4" />
               Start a conversation
+            </a>
+          </Button>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
+        >
+          <Button asChild size="lg" variant="outline" className="group">
+            <a href="/cipher-breaker">
+              <Gamepad2 className="mr-2 h-4 w-4" />
+              Play Games
             </a>
           </Button>
         </motion.div>
