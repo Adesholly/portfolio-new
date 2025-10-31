@@ -22,6 +22,10 @@ export default function CipherBreakerPage() {
           >
             Towers of Hanoi
           </a>
+          <span>·</span>
+          <a className="underline hover:text-foreground" href="/2048">
+            2048
+          </a>
         </div>
       </div>
     </section>

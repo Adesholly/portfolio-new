@@ -51,7 +51,7 @@ export function Intro() {
           className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
         >
           <Button asChild size="lg" variant="outline" className="group">
-            <a href="/cipher-breaker">
+            <a href="/towers-of-hanoi">
               <Gamepad2 className="mr-2 h-4 w-4" />
               Play Games
             </a>

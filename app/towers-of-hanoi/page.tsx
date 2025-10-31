@@ -14,9 +14,15 @@ export default function TowersOfHanoiPage() {
           <h1 className="text-2xl font-bold">Towers of Hanoi</h1>
         </div>
         <TowersOfHanoi />
-        <div className="text-center text-xs text-muted-foreground">
-          Tip: Click a peg to pick up the top disk, then click another peg to
-          drop.
+        <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
+          <span>More games:</span>
+          <a className="underline hover:text-foreground" href="/cipher-breaker">
+            Cipher Breaker
+          </a>
+          <span>·</span>
+          <a className="underline hover:text-foreground" href="/2048">
+            2048
+          </a>
         </div>
       </div>
     </section>
