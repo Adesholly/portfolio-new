@@ -14,8 +14,22 @@ export default function Game2048Page() {
           <h1 className="text-2xl font-bold">2048</h1>
         </div>
         <Game2048 />
-        <div className="text-center text-xs text-muted-foreground">
-          Use your keyboard arrows. Good luck!
+        <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
+          <span>More games:</span>
+          <a
+            className="underline hover:text-foreground"
+            href="/towers-of-hanoi"
+          >
+            Towers of Hanoi
+          </a>
+          <span>·</span>
+          <a className="underline hover:text-foreground" href="/cipher-breaker">
+            Cipher Breaker
+          </a>
+          <span>·</span>
+          <a className="underline hover:text-foreground" href="/sudoku">
+            Sudoku
+          </a>
         </div>
       </div>
     </section>

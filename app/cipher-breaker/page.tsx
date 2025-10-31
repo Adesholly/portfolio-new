@@ -26,6 +26,10 @@ export default function CipherBreakerPage() {
           <a className="underline hover:text-foreground" href="/2048">
             2048
           </a>
+          <span>·</span>
+          <a className="underline hover:text-foreground" href="/sudoku">
+            Sudoku
+          </a>
         </div>
       </div>
     </section>
