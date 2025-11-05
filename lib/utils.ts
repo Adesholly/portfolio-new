@@ -1,3 +1,9 @@
+import { type ClassValue, clsx } from "clsx";
+
+export function cn(...inputs: ClassValue[]) {
+  return clsx(inputs);
+}
+
 export const validateString = (
   value: unknown,
   maxLength: number
@@ -24,3 +30,10 @@ export const getErrorMessage = (error: unknown): string => {
 
   return message;
 };
+
+export const yearOfExperience = (startYear: number) => {
+  const currentYear = new Date().getFullYear();
+  return Math.max(0, currentYear - startYear);
+};
+
+export const experienceYears = yearOfExperience(2020);

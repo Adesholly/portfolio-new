@@ -1,21 +1,22 @@
-import About from "@/components/about";
-import Contact from "@/components/contact";
-import Experience from "@/components/experience";
-import Intro from "@/components/intro";
-import Projects from "@/components/projects";
-import SectionDivider from "@/components/section-divider";
-import Skills from "@/components/skills";
+import { Intro } from "@/components/sections/intro";
+import { About } from "@/components/sections/about";
+import { Experience } from "@/components/sections/experience";
+import { Projects } from "@/components/sections/projects";
+import { Contact } from "@/components/sections/contact";
+import { SectionDivider } from "@/components/ui/section-divider";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <main className="flex flex-col items-center px-4">
+    <div className="flex flex-col">
       <Intro />
       <SectionDivider />
       <About />
+      <SectionDivider />
       <Projects />
-      <Skills />
+      <SectionDivider />
       <Experience />
+      <SectionDivider />
       <Contact />
-    </main>
+    </div>
   );
 }

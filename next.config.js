@@ -9,8 +9,15 @@ const nextConfig = {
     ],
   },
   experimental: {
-    serverActions: true,
+    optimizePackageImports: ["lucide-react", "framer-motion"],
   },
+  typescript: {
+    ignoreBuildErrors: false,
+  },
+  eslint: {
+    ignoreDuringBuilds: false,
+  },
+  pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
 };
 
 module.exports = nextConfig;
