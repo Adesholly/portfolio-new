@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     template: "%s | Adesholly",
   },
   description:
-    "Full-stack developer with 8+ years of experience building modern web applications. Specialized in React, Next.js, Node.js, and cloud technologies.",
+    "Full-stack developer with 5+ years of experience building modern web applications. Specialized in React, Next.js, Node.js, and cloud technologies.",
   keywords: [
     "full-stack developer",
     "react",
@@ -65,6 +65,11 @@ export const metadata: Metadata = {
   },
   verification: {
     google: "your-google-verification-code",
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
   },
 };
 
