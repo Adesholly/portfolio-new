@@ -5,27 +5,28 @@ describe("Intro", () => {
   it("renders the main heading", () => {
     render(<Intro />);
     expect(screen.getByText(/hi, i'm/i)).toBeInTheDocument();
-    expect(screen.getByText("Adesholly")).toBeInTheDocument();
+    expect(screen.getByText("Ibrahim")).toBeInTheDocument();
   });
 
   it("renders the description", () => {
     render(<Intro />);
     expect(
-      screen.getByText(/full-stack developer with 5\+ years of experience/i)
+      screen.getByText(/full-stack developer with \d+\+ years of experience/i)
     ).toBeInTheDocument();
   });
 
-  it("renders the download CV button", () => {
+  it("renders the preview resume button", () => {
     render(<Intro />);
     expect(
-      screen.getByRole("button", { name: /download cv/i })
+      screen.getByRole("link", { name: /preview resume/i })
     ).toBeInTheDocument();
   });
 
-  it("renders social links", () => {
+  it("renders the start conversation button", () => {
     render(<Intro />);
-    const socialLinks = screen.getAllByRole("link");
-    expect(socialLinks.length).toBeGreaterThan(0);
+    expect(
+      screen.getByRole("link", { name: /start a conversation/i })
+    ).toBeInTheDocument();
   });
 
   it("renders scroll down link", () => {
