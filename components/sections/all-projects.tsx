@@ -5,24 +5,20 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Image from "next/image";
 import Link from "next/link";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { projectsData } from "@/lib/data";
 
-export function Projects() {
+export function AllProjects() {
   const { ref, inView } = useInView({
     threshold: 0.1,
     triggerOnce: true,
   });
 
-  const featuredProjects = projectsData.filter(
-    (project) => project.featured !== false
-  );
-
   return (
-    <section id="projects" ref={ref} className="px-4 py-20">
+    <section id="all-projects" ref={ref} className="px-4 py-20">
       <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -31,10 +27,10 @@ export function Projects() {
           className="text-center"
         >
           <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Featured Projects
+            All Projects
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            Here are some of my recent projects that I&apos;m proud of.
+            A comprehensive collection of my work and projects.
           </p>
         </motion.div>
 
@@ -44,7 +40,7 @@ export function Projects() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3"
         >
-          {featuredProjects.map((project, index) => (
+          {projectsData.map((project, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
@@ -106,17 +102,6 @@ export function Projects() {
               </Card>
             </motion.div>
           ))}
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-12 text-center"
-        >
-          <Button asChild size="lg">
-            <Link href="/projects">View All Projects</Link>
-          </Button>
         </motion.div>
       </div>
     </section>

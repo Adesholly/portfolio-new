@@ -1,9 +1,17 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ExternalLink, Github } from "lucide-react";
+import {
+  ArrowLeft,
+  ExternalLink,
+  Github,
+  CheckCircle2,
+  Code2,
+  TrendingUp,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { projectsData } from "@/lib/data";
 import type { Metadata } from "next";
 
@@ -111,6 +119,109 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               )}
             </div>
           </div>
+
+          {/* Key Features Section */}
+          {project.keyFeatures && project.keyFeatures.length > 0 && (
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <CheckCircle2 className="h-5 w-5 text-primary" />
+                  Key Features
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3">
+                  {project.keyFeatures.map((feature, index) => {
+                    const [featureName, featureDescription] = feature.includes(
+                      ":"
+                    )
+                      ? feature.split(": ").map((s) => s.trim())
+                      : [null, feature];
+                    return (
+                      <li key={index} className="flex items-start gap-3">
+                        <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                        <div>
+                          {featureName ? (
+                            <>
+                              <span className="font-semibold text-foreground">
+                                {featureName}:
+                              </span>{" "}
+                              <span className="text-muted-foreground">
+                                {featureDescription}
+                              </span>
+                            </>
+                          ) : (
+                            <span className="text-muted-foreground">
+                              {feature}
+                            </span>
+                          )}
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Technologies Used Section */}
+          {project.technologiesUsed && project.technologiesUsed.length > 0 && (
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Code2 className="h-5 w-5 text-primary" />
+                  Technologies Used
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3">
+                  {project.technologiesUsed.map((tech, index) => {
+                    const [techCategory, techDetails] = tech.includes(":")
+                      ? tech.split(": ").map((s) => s.trim())
+                      : [null, tech];
+                    return (
+                      <li key={index} className="flex items-start gap-3">
+                        <Code2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                        <div>
+                          {techCategory ? (
+                            <>
+                              <span className="font-semibold text-foreground">
+                                {techCategory}:
+                              </span>{" "}
+                              <span className="text-muted-foreground">
+                                {techDetails}
+                              </span>
+                            </>
+                          ) : (
+                            <span className="text-muted-foreground">
+                              {tech}
+                            </span>
+                          )}
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Business Impact Section */}
+          {project.businessImpact && (
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <TrendingUp className="h-5 w-5 text-primary" />
+                  Business Impact
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="leading-relaxed text-muted-foreground">
+                  {project.businessImpact}
+                </p>
+              </CardContent>
+            </Card>
+          )}
         </div>
       </div>
     </div>
