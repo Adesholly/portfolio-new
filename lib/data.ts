@@ -3,14 +3,14 @@ import { CgWorkAlt } from "react-icons/cg";
 import { FaReact } from "react-icons/fa";
 import { LuGraduationCap } from "react-icons/lu";
 import { Github, Linkedin, Mail, Twitter } from "lucide-react";
-import pislfreightImg from "@/public/pislfreight.png";
-import zenillaImg from "@/public/zenilla.png";
-import huntvilleImg from "@/public/huntville.png";
-import axamansardImg from "@/public/axamansard.png";
-import lagferryImg from "@/public/lagferry.png";
-import coverageLocatorImg from "@/public/coverage-locator.png";
-import geolockImg from "@/public/geolock.png";
-import pdcImg from "@/public/pdc.png";
+import pislfreightImg from "../public/pislfreight.png";
+import zenillaImg from "../public/zenilla.png";
+import huntvilleImg from "../public/huntville.png";
+import axamansardImg from "../public/axamansard.png";
+import lagferryImg from "../public/lagferry.png";
+import coverageLocatorImg from "../public/coverage-locator.png";
+import geolockImg from "../public/geolock.png";
+import pdcImg from "../public/pdc.png";
 
 export const links = [
   {
