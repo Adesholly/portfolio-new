@@ -73,6 +73,7 @@ export function Sudoku() {
   >("medium");
   const [solving, setSolving] = React.useState(false);
   const [mounted, setMounted] = React.useState(false);
+  const touchStartRef = React.useRef<{ x: number; y: number } | null>(null);
 
   const initialCells = React.useMemo(() => {
     const set = new Set<string>();
@@ -121,6 +122,85 @@ export function Sudoku() {
       setSelected([nextR, nextC]);
     }
   }
+
+  const navigateCell = React.useCallback(
+    (direction: "up" | "down" | "left" | "right") => {
+      if (!selected) {
+        // If no selection, select first empty cell or first cell
+        for (let r = 0; r < 9; r++) {
+          for (let c = 0; c < 9; c++) {
+            if (!initialCells.has(`${r}-${c}`)) {
+              setSelected([r, c]);
+              return;
+            }
+          }
+        }
+        setSelected([0, 0]);
+        return;
+      }
+
+      const [r, c] = selected;
+      let nextR = r;
+      let nextC = c;
+
+      if (direction === "up" && r > 0) nextR--;
+      else if (direction === "down" && r < 8) nextR++;
+      else if (direction === "left" && c > 0) nextC--;
+      else if (direction === "right" && c < 8) nextC++;
+
+      setSelected([nextR, nextC]);
+    },
+    [selected, initialCells]
+  );
+
+  const handleTouchStart = React.useCallback((e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    touchStartRef.current = {
+      x: touch.clientX,
+      y: touch.clientY,
+    };
+  }, []);
+
+  const handleTouchMove = React.useCallback((e: React.TouchEvent) => {
+    if (touchStartRef.current) {
+      e.preventDefault(); // Prevent scrolling during swipe
+    }
+  }, []);
+
+  const handleTouchEnd = React.useCallback(
+    (e: React.TouchEvent) => {
+      if (!touchStartRef.current) return;
+
+      const touch = e.changedTouches[0];
+      const deltaX = touch.clientX - touchStartRef.current.x;
+      const deltaY = touch.clientY - touchStartRef.current.y;
+      const minSwipeDistance = 30;
+
+      touchStartRef.current = null;
+
+      const absDeltaX = Math.abs(deltaX);
+      const absDeltaY = Math.abs(deltaY);
+
+      if (absDeltaX < minSwipeDistance && absDeltaY < minSwipeDistance) return;
+
+      if (absDeltaX > absDeltaY) {
+        // Horizontal swipe
+        if (deltaX > 0) {
+          navigateCell("right");
+        } else {
+          navigateCell("left");
+        }
+      } else {
+        // Vertical swipe
+        if (deltaY > 0) {
+          navigateCell("down");
+        } else {
+          navigateCell("up");
+        }
+      }
+    },
+    [navigateCell]
+  );
 
   function newGame() {
     const newPuzzle = generateSudoku(difficulty);
@@ -212,11 +292,15 @@ export function Sudoku() {
 
       <div className="mx-auto w-full max-w-md">
         <div
-          className="grid grid-cols-9 gap-px border-2 border-foreground bg-foreground"
+          className="grid touch-none select-none grid-cols-9 gap-px border-2 border-foreground bg-foreground"
           onKeyDown={handleKeyDown}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
           tabIndex={0}
           role="grid"
           aria-label="Sudoku puzzle"
+          style={{ touchAction: "none" }}
         >
           {userGrid.map((row, rIdx) =>
             row.map((cell, cIdx) => {
@@ -230,7 +314,7 @@ export function Sudoku() {
                 <button
                   key={`${rIdx}-${cIdx}`}
                   onClick={() => handleCellClick(rIdx, cIdx)}
-                  className={`flex h-10 items-center justify-center border border-border bg-background text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring ${
+                  className={`flex h-10 min-h-[44px] touch-manipulation items-center justify-center border border-border bg-background text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring active:bg-accent sm:h-10 ${
                     isSelected
                       ? "bg-primary/20 ring-2 ring-primary"
                       : "hover:bg-accent"
@@ -240,6 +324,7 @@ export function Sudoku() {
                       : ""
                   }`}
                   disabled={isInitial}
+                  style={{ touchAction: "manipulation" }}
                   aria-label={`Cell row ${rIdx + 1} column ${cIdx + 1}, value ${cell || "empty"}`}
                 >
                   {cell !== 0 ? cell : ""}
@@ -251,20 +336,28 @@ export function Sudoku() {
       </div>
 
       <div className="mt-4 flex flex-col gap-2">
-        <div className="flex justify-center gap-1">
+        <div className="flex justify-center gap-1 sm:gap-2">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
             <button
               key={num}
               onClick={() => handleNumberInput(num)}
-              className="flex h-10 w-10 items-center justify-center rounded border bg-background text-sm font-medium transition-colors hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50"
+              className="flex h-12 min-h-[44px] w-12 min-w-[44px] touch-manipulation items-center justify-center rounded border bg-background text-base font-medium transition-colors hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring active:bg-accent disabled:opacity-50 sm:h-10 sm:w-10 sm:text-sm"
               disabled={!selected}
+              style={{ touchAction: "manipulation" }}
+              aria-label={`Enter number ${num}`}
             >
               {num}
             </button>
           ))}
         </div>
         <p className="text-center text-xs text-muted-foreground">
-          Click a cell, then enter a number. Use arrow keys to navigate.
+          <span className="hidden sm:inline">
+            Click a cell, then enter a number. Use arrow keys or swipe to
+            navigate.
+          </span>
+          <span className="sm:hidden">
+            Tap a cell, then tap a number. Swipe on grid to navigate cells.
+          </span>
         </p>
       </div>
 

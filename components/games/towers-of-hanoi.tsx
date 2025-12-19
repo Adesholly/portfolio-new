@@ -96,21 +96,25 @@ export function TowersOfHanoi() {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-2 sm:gap-4">
         {pegs.map((peg, idx) => (
           <button
             key={idx}
             onClick={() => handlePegClick(idx as PegIndex)}
+            onTouchStart={(e) => {
+              e.currentTarget.classList.add("active:bg-accent");
+            }}
             className={
-              "relative flex h-72 items-end justify-center rounded-md border p-2 transition-colors " +
+              "relative flex h-64 min-h-[44px] touch-manipulation items-end justify-center rounded-md border p-2 transition-all sm:h-72 " +
               (selectedPeg === (idx as PegIndex)
-                ? "border-primary ring-2 ring-primary/40"
-                : "hover:bg-accent")
+                ? "border-primary bg-primary/5 ring-2 ring-primary/40"
+                : "hover:bg-accent active:bg-accent")
             }
             aria-label={`Peg ${idx + 1}`}
+            style={{ touchAction: "manipulation" }}
           >
             {/* Peg pole */}
-            <div className="absolute inset-x-1/2 bottom-2 h-56 w-1 -translate-x-1/2 bg-muted" />
+            <div className="absolute inset-x-1/2 bottom-2 h-48 w-1 -translate-x-1/2 bg-muted sm:h-56" />
             {/* Base */}
             <div className="absolute bottom-1 h-1 w-10/12 rounded bg-muted" />
             {/* Disks */}

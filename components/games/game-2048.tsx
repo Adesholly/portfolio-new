@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Button } from "@/components/ui/button";
+import { ArrowUp, ArrowDown, ArrowLeft, ArrowRight } from "lucide-react";
 
 type Board = number[][]; // 4x4
 
@@ -130,6 +131,12 @@ export function Game2048() {
   const [board, setBoard] = React.useState<Board>(emptyBoard());
   const [score, setScore] = React.useState<number>(0);
   const [gameOver, setGameOver] = React.useState<boolean>(false);
+  const touchStartRef = React.useRef<{
+    x: number;
+    y: number;
+    time: number;
+  } | null>(null);
+  const boardRef = React.useRef<HTMLDivElement>(null);
 
   // Initialize board with random tiles only on client after mount to avoid hydration mismatch
   React.useEffect(() => {
@@ -166,6 +173,64 @@ export function Game2048() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [handleMove]);
 
+  // Swipe gesture handlers
+  const handleTouchStart = React.useCallback((e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    touchStartRef.current = {
+      x: touch.clientX,
+      y: touch.clientY,
+      time: Date.now(),
+    };
+  }, []);
+
+  const handleTouchMove = React.useCallback((e: React.TouchEvent) => {
+    if (touchStartRef.current) {
+      e.preventDefault(); // Prevent scrolling during swipe
+    }
+  }, []);
+
+  const handleTouchEnd = React.useCallback(
+    (e: React.TouchEvent) => {
+      if (!touchStartRef.current) return;
+
+      const touch = e.changedTouches[0];
+      const deltaX = touch.clientX - touchStartRef.current.x;
+      const deltaY = touch.clientY - touchStartRef.current.y;
+      const deltaTime = Date.now() - touchStartRef.current.time;
+      const minSwipeDistance = 30;
+      const maxSwipeTime = 500;
+
+      // Reset touch start
+      touchStartRef.current = null;
+
+      // Check if swipe is valid (minimum distance and maximum time)
+      if (deltaTime > maxSwipeTime) return;
+
+      const absDeltaX = Math.abs(deltaX);
+      const absDeltaY = Math.abs(deltaY);
+
+      if (absDeltaX < minSwipeDistance && absDeltaY < minSwipeDistance) return;
+
+      // Determine swipe direction
+      if (absDeltaX > absDeltaY) {
+        // Horizontal swipe
+        if (deltaX > 0) {
+          handleMove("right");
+        } else {
+          handleMove("left");
+        }
+      } else {
+        // Vertical swipe
+        if (deltaY > 0) {
+          handleMove("down");
+        } else {
+          handleMove("up");
+        }
+      }
+    },
+    [handleMove]
+  );
+
   function reset() {
     setBoard(addRandomTile(addRandomTile(emptyBoard())));
     setScore(0);
@@ -194,7 +259,10 @@ export function Game2048() {
     <div className="rounded-md border p-4">
       <div className="mb-4 flex items-center justify-between">
         <div className="text-sm text-muted-foreground">
-          Use arrow keys to move tiles
+          <span className="hidden sm:inline">Use arrow keys or </span>
+          <span className="sm:hidden">Swipe or </span>
+          <span className="hidden sm:inline">swipe to move tiles</span>
+          <span className="sm:hidden">use arrow buttons</span>
         </div>
         <div className="flex items-center gap-3 text-sm text-muted-foreground">
           <span>Score: {score}</span>
@@ -204,7 +272,14 @@ export function Game2048() {
         </div>
       </div>
 
-      <div className="mx-auto grid w-full max-w-md grid-cols-4 gap-2">
+      <div
+        ref={boardRef}
+        className="mx-auto grid w-full max-w-md touch-none select-none grid-cols-4 gap-2"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        style={{ touchAction: "none" }}
+      >
         {board.map((row, rIdx) =>
           row.map((val, cIdx) => (
             <div
@@ -216,6 +291,53 @@ export function Game2048() {
             </div>
           ))
         )}
+      </div>
+
+      {/* Mobile arrow buttons */}
+      <div className="mt-4 flex justify-center sm:hidden">
+        <div className="grid grid-cols-3 gap-2">
+          <div></div>
+          <Button
+            size="lg"
+            variant="outline"
+            className="h-12 w-12"
+            onClick={() => handleMove("up")}
+            aria-label="Move up"
+          >
+            <ArrowUp className="h-5 w-5" />
+          </Button>
+          <div></div>
+          <Button
+            size="lg"
+            variant="outline"
+            className="h-12 w-12"
+            onClick={() => handleMove("left")}
+            aria-label="Move left"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </Button>
+          <div></div>
+          <Button
+            size="lg"
+            variant="outline"
+            className="h-12 w-12"
+            onClick={() => handleMove("right")}
+            aria-label="Move right"
+          >
+            <ArrowRight className="h-5 w-5" />
+          </Button>
+          <div></div>
+          <Button
+            size="lg"
+            variant="outline"
+            className="h-12 w-12"
+            onClick={() => handleMove("down")}
+            aria-label="Move down"
+          >
+            <ArrowDown className="h-5 w-5" />
+          </Button>
+          <div></div>
+        </div>
       </div>
 
       {gameOver && (
